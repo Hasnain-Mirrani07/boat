@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "564754992714",
+    "project_id": "boatapp-e2f43",
+    "storage_bucket": "boatapp-e2f43.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564754992714:android:23f789843c5bb643dce0b3",
+        "android_client_info": {
+          "package_name": "com.example.boat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564754992714-o3dffltlom5gd7ge0012algu1lnu5thh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.boat",
+            "certificate_hash": "c9b0bb3614772620c6878cd1bfe24e6c55be4e07"
+          }
+        },
+        {
+          "client_id": "564754992714-1nvv9n4qg11g5bf2uuvh99vpmnmmk8ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8lvU21t-8T9IDoj28Vd40x0yWiWnd8Fk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564754992714-1nvv9n4qg11g5bf2uuvh99vpmnmmk8ep.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "564754992714-cma8u8h9b7vi5dsfc95bgbnmgtg8g19k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.boatOwner"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564754992714:android:bc1130970d1d555edce0b3",
+        "android_client_info": {
+          "package_name": "com.example.boat_owner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564754992714-5s7ghqg4un0bko0drr2c1g67h7nq8kmj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.boat_owner",
+            "certificate_hash": "c9b0bb3614772620c6878cd1bfe24e6c55be4e07"
+          }
+        },
+        {
+          "client_id": "564754992714-1nvv9n4qg11g5bf2uuvh99vpmnmmk8ep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8lvU21t-8T9IDoj28Vd40x0yWiWnd8Fk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564754992714-1nvv9n4qg11g5bf2uuvh99vpmnmmk8ep.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "564754992714-cma8u8h9b7vi5dsfc95bgbnmgtg8g19k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.boatOwner"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
