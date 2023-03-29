@@ -468,7 +468,7 @@ class _Favorite_Booking_BoatState extends State<Favorite_Booking_Boat> {
                                 'uid': retrievedfavList![widget.index].uid,
                                 'hours': dh,
                                 'price': g,
-                                'request': "confirmed",
+                                'request': "pending",
                                 'boatname':
                                     retrievedfavList![widget.index].fboatname,
                                 'uid': widget.uid,

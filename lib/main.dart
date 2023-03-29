@@ -35,8 +35,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   dependencyInjection();
-  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  LocalNotificationService.initialize(null);
+ // FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+  // LocalNotificationService.initialize(null);
 
   runApp(const MyApp());
 }
@@ -53,8 +53,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    LocalNotificationService.initialize(context);
-    LocalNotificationService.initState(context);
+    // LocalNotificationService.initialize(context);
+    // LocalNotificationService.initState(context);
   }
 
   @override
@@ -123,7 +123,7 @@ class WrapperWidget extends StatelessWidget {
       child: Container(
           color: Colors.white,
           alignment: Alignment.center,
-          child: Text("Loading...")
+          child: const Text("Loading...")
 
           // Lottie.asset(
           //     'assets/lottie/splash_boat.json',

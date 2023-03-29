@@ -86,14 +86,16 @@ class CashThankYouScreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Center(
+                Center(
                   child: Text(
-                    "your Booking Will Expired in 60 minutes so be on location on time.",
+                    "your Booking hasb been confirmed with cash payment based. For any avoiding inconvenience be on time otherwise your booking will be cancelled automatically.",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontSize: 13,
-                        fontFamily: "poppins",
-                        fontWeight: FontWeight.w600,
-                        color: blackTheme),
+                      fontSize: 11.sp,
+                      fontFamily: "poppins",
+                      fontWeight: FontWeight.w400,
+                      color: black6Color.withOpacity(.44),
+                    ),
                   ),
                 ),
                 const SizedBox(
