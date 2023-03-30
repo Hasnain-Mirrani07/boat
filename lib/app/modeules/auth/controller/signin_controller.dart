@@ -22,10 +22,11 @@ class SignInController extends BaseController {
   bool _isObsecure = false;
 
   validate() async {
-    Focus.of(Get.context!).unfocus();
+    //Focus.of(Get.context!).unfocus();
     if (formKey.currentState?.validate() ?? false) {
       isLoading = true;
-      AuthState authState = await authController.signInWithEmailPassword(emailC.text, passwordC.text);
+      AuthState authState = await authController.signInWithEmailPassword(
+          emailC.text, passwordC.text);
       isLoading = false;
       if (authState == AuthState.SIGNEDINSUCESS) {
         //TODO: goto home
@@ -40,14 +41,18 @@ class SignInController extends BaseController {
     try {
       isLoading2 = true;
       final GoogleSignIn googleSignIn = GoogleSignIn();
-      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
       if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+        final GoogleSignInAuthentication googleSignInAuthentication =
+            await googleSignInAccount.authentication;
         final AuthCredential authCredential = GoogleAuthProvider.credential(
-            idToken: googleSignInAuthentication.idToken, accessToken: googleSignInAuthentication.accessToken);
+            idToken: googleSignInAuthentication.idToken,
+            accessToken: googleSignInAuthentication.accessToken);
 
         // Getting users credential
-        UserCredential result = await FirebaseAuth.instance.signInWithCredential(authCredential);
+        UserCredential result =
+            await FirebaseAuth.instance.signInWithCredential(authCredential);
         User? user = result.user;
         FirebaseFirestore.instance.collection("Users").doc(user!.uid).set({
           "p_image": user.photoURL,
@@ -56,19 +61,20 @@ class SignInController extends BaseController {
         });
         // await storage.write(key: 'uid1', value: user.uid);
 
-        MyAppUser? myUser = await FirebaseFirestoreServices().loadMyAppUserData(uid: FirebaseAuth.instance.currentUser?.uid);
+        MyAppUser? myUser = await FirebaseFirestoreServices()
+            .loadMyAppUserData(uid: FirebaseAuth.instance.currentUser?.uid);
         if (myUser != null) {
           isLoading2 = false;
-          Get.off(WrapperWidget());
+          Get.off(const WrapperWidget());
         } // if result not null we simply call the MaterialpageRoute,
         // for go to the HomePage screen
       }
     } on FirebaseAuthException catch (e) {
       isLoading2 = false;
-      Get.snackbar("Error", e.message.toString(), icon: Icon(Icons.person, color: Colors.red), snackPosition: SnackPosition.BOTTOM);
-    }
-
-    finally{
+      Get.snackbar("Error", e.message.toString(),
+          icon: const Icon(Icons.person, color: Colors.red),
+          snackPosition: SnackPosition.BOTTOM);
+    } finally {
       isLoading2 = false;
     }
   }

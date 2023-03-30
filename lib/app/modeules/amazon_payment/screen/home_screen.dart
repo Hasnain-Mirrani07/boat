@@ -8,13 +8,20 @@ import '../utils/colors.dart';
 import '../utils/strings.dart';
 import 'paymentselection_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   //const HomeScreen({super.key});
   int? amount;
-  HomeScreen({Key? key, this.amount}) : super(key: key);
+  String? id;
+  HomeScreen({Key? key, this.amount, this.id}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
+    print("Homecollecion ${widget.id}  amount ${widget.amount}");
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -76,9 +83,10 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Center(
                   child: BlueBtn(
-                    title: "$payAmountString \$ $amount",
+                    title: "$payAmountString \$ ${widget.amount}",
                     onPressed: () => Get.to(PaymentSelectionScreen(
-                      amount: amount,
+                      id: widget.id,
+                      amount: widget.amount,
                     )),
                   ),
                 ),

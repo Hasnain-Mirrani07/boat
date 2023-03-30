@@ -1,4 +1,5 @@
 import 'package:boat/app/bottomapp.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,12 +9,27 @@ import '../utils/assets.dart';
 import '../utils/colors.dart';
 import '../utils/strings.dart';
 
-class CashThankYouScreen extends StatelessWidget {
-  const CashThankYouScreen({Key? key}) : super(key: key);
+class CashThankYouScreen extends StatefulWidget {
+  CashThankYouScreen({Key? key, this.cid}) : super(key: key);
+  String? cid;
+  @override
+  State<CashThankYouScreen> createState() => _CashThankYouScreenState();
+}
 
+class _CashThankYouScreenState extends State<CashThankYouScreen> {
   // const ThankYouScreen({super.key});
-
   get editingController => null;
+
+  String? id = "";
+  final firestore = FirebaseFirestore.instance.collection("bookingRequestSend");
+
+  @override
+  void initState() {
+    print("collecion id ${widget.cid}");
+
+    firestore.doc(widget.cid).update({'paymethod': "cash"});
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

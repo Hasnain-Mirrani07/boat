@@ -7,6 +7,8 @@ class Booking_Boats {
   String? image;
   String? boat_name;
   String? sender_uid;
+  String? request;
+
   var hours_perday;
   var total_amount;
   var overview;
@@ -17,6 +19,7 @@ class Booking_Boats {
   var tokenforcompletation;
 
   Booking_Boats({
+    this.request,
     this.image,
     this.end_time,
     this.start_time,
@@ -66,5 +69,6 @@ class Booking_Boats {
         booking_status = doc.data()!["booking_status"],
         boat_sender_uid = doc.data()!["rbuid"],
         tokenforcompletation = doc.data()!["token"],
+        request = doc.data()!["request"],
         documnet_id = doc.id;
 }

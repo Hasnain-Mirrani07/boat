@@ -6,10 +6,12 @@ import 'package:boat/app/modeules/home_page/controller/controller.dart';
 import 'package:boat/app/modeules/offers&details/offers_and_details.dart';
 import 'package:boat/app/themes/styles/textstyle.dart';
 import 'package:boat/services/uid.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../../../singaltonClass.dart';
 import '../../models/boat_data.dart';
 
 class Home_page extends StatefulWidget {
@@ -36,9 +38,10 @@ class _Home_pageState extends State<Home_page> {
 
   Future<List<Favorites_Boat_data>>? favList;
   List<Favorites_Boat_data>? retrievedfavList;
-
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   void initState() {
+    SessionController().userId = _auth.currentUser!.uid;
     super.initState();
     setState(() {
       _initRetrieval();
@@ -172,7 +175,7 @@ class _Home_pageState extends State<Home_page> {
                                         onTap: () async {
                                           var documnetId =
                                               retrievedEmployeeList[index].id;
-
+                                          
                                           Get.to(Boat_Booking_page(
                                               i: index,
                                               check_fav: true,

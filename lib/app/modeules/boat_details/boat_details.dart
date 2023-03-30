@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import '../../../singaltonClass.dart';
 import '../../bottomapp.dart';
 import '../../global_widgets/back_arrow.dart';
 import '../../global_widgets/reuseable_button.dart';
@@ -84,6 +85,7 @@ class _Boat_Booking_pageState extends State<Boat_Booking_page> {
 
       // first add the data to the Offset object
       var e = getData?['likedby'];
+      SessionControllerOwner().owneruid = getData?['owneruid'];
 
       for (var i = 0; i < e!.length; i++) {
         if (e[i] == _auth.currentUser!.uid) {

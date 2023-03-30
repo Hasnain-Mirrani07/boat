@@ -22,7 +22,14 @@ import '../../../themes/styles/textstyle.dart';
 import '../../home_page/controller/controller.dart';
 
 class Booking_boat extends StatefulWidget {
-  Booking_boat({required this.uid, required this.bname, required this.bimg, required this.index, this.document_id});
+  Booking_boat(
+      {Key? key,
+      required this.uid,
+      required this.bname,
+      required this.bimg,
+      required this.index,
+      this.document_id})
+      : super(key: key);
 
   var uid;
   var bname;
@@ -38,14 +45,18 @@ class _Booking_boatState extends State<Booking_boat> {
   var sender_token;
 
   Future<void> getdata() async {
-    FirebaseFirestore.instance.collection('Users').doc(_auth.currentUser!.uid).get().then((querySnapshot) {
+    FirebaseFirestore.instance
+        .collection('Users')
+        .doc(_auth.currentUser!.uid)
+        .get()
+        .then((querySnapshot) {
       querySnapshot(result) {
         sender_token = result["token"];
       }
     });
   }
 
-  RangeValues _currentRangeValues = const RangeValues(40, 80);
+  final RangeValues _currentRangeValues = const RangeValues(40, 80);
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   final con = Get.put(GetData());
@@ -56,7 +67,7 @@ class _Booking_boatState extends State<Booking_boat> {
   var hours;
   var price;
   var i;
-  var uuid = Uuid();
+  var uuid = const Uuid();
   var load = true;
   Future<List<Boat_data>>? employeeList;
   List<Boat_data>? retrievedEmployeeList;
@@ -96,7 +107,8 @@ class _Booking_boatState extends State<Booking_boat> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 26),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 26),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -111,7 +123,10 @@ class _Booking_boatState extends State<Booking_boat> {
                                 },
                                 child: const Text(
                                   "Cancel",
-                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.black_type),
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: AppColors.black_type),
                                 ),
                               )
                             ],
@@ -120,7 +135,8 @@ class _Booking_boatState extends State<Booking_boat> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           child: Card(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               children: [
                                 Padding(
@@ -142,14 +158,18 @@ class _Booking_boatState extends State<Booking_boat> {
                                       style: AppTextStyles.kPrimaryS5W4,
                                     ),
                                     Text(
-                                      retrievedEmployeeList![widget.index].overview!.substring(0, 12),
+                                      retrievedEmployeeList![widget.index]
+                                          .overview!
+                                          .substring(0, 12),
                                       style: AppTextStyles.kPrimaryS7W4,
                                     ),
                                     const SizedBox(
                                       height: 11,
                                     ),
                                     StarRating(
-                                      rating: retrievedEmployeeList![widget.index].total_rating,
+                                      rating:
+                                          retrievedEmployeeList![widget.index]
+                                              .total_rating,
                                     )
                                   ],
                                 ),
@@ -163,15 +183,22 @@ class _Booking_boatState extends State<Booking_boat> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: RichText(
-                            text: TextSpan(text: 'Boating Availability  ', style: AppTextStyles.kPrimaryS12W3, children: <TextSpan>[
-                              TextSpan(
-                                text: DateFormat('(MMMM, yyyy)').format(currentMonthDate),
-                                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 17, color: AppColors.black_type),
-                              ),
-                            ]),
+                            text: TextSpan(
+                                text: 'Boating Availability  ',
+                                style: AppTextStyles.kPrimaryS12W3,
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: DateFormat('(MMMM, yyyy)')
+                                        .format(currentMonthDate),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 17,
+                                        color: AppColors.black_type),
+                                  ),
+                                ]),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                         ),
                         Padding(
@@ -186,7 +213,9 @@ class _Booking_boatState extends State<Booking_boat> {
                                   ? const SizedBox(
                                       height: 0,
                                     )
-                                  : Text("${retrievedEmployeeList![widget.index].mon}", style: AppTextStyles.weeks),
+                                  : Text(
+                                      "${retrievedEmployeeList![widget.index].mon}",
+                                      style: AppTextStyles.weeks),
                               retrievedEmployeeList![widget.index].mon == null
                                   ? const SizedBox(
                                       height: 0,
@@ -243,7 +272,9 @@ class _Booking_boatState extends State<Booking_boat> {
                                   ? const SizedBox(
                                       height: 0,
                                     )
-                                  : Text("${retrievedEmployeeList![widget.index].fri}", style: AppTextStyles.weeks),
+                                  : Text(
+                                      "${retrievedEmployeeList![widget.index].fri}",
+                                      style: AppTextStyles.weeks),
                               retrievedEmployeeList![widget.index].fri == null
                                   ? const SizedBox(
                                       height: 0,
@@ -255,7 +286,9 @@ class _Booking_boatState extends State<Booking_boat> {
                                   ? const SizedBox(
                                       height: 0,
                                     )
-                                  : Text("${retrievedEmployeeList![widget.index].sat}", style: AppTextStyles.weeks),
+                                  : Text(
+                                      "${retrievedEmployeeList![widget.index].sat}",
+                                      style: AppTextStyles.weeks),
                               retrievedEmployeeList![widget.index].sat == null
                                   ? const SizedBox(
                                       height: 0,
@@ -267,7 +300,9 @@ class _Booking_boatState extends State<Booking_boat> {
                                   ? const SizedBox(
                                       height: 0,
                                     )
-                                  : Text("${retrievedEmployeeList![widget.index].sun}", style: AppTextStyles.weeks),
+                                  : Text(
+                                      "${retrievedEmployeeList![widget.index].sun}",
+                                      style: AppTextStyles.weeks),
                             ],
                           ),
                         ),
@@ -308,7 +343,7 @@ class _Booking_boatState extends State<Booking_boat> {
                           values: RangeValues(start!, end!),
                           max: 24,
 
-                          inactiveColor: Color(0xffF4F5F7),
+                          inactiveColor: const Color(0xffF4F5F7),
                           activeColor: AppColors.Sdark_blue,
                           // labels: RangeLabels(
                           //   _currentRangeValues.start.round().toString(),
@@ -332,11 +367,17 @@ class _Booking_boatState extends State<Booking_boat> {
                             children: const [
                               Text(
                                 "Start Time",
-                                style: TextStyle(color: AppColors.black_type, fontSize: 11, fontWeight: FontWeight.w400),
+                                style: TextStyle(
+                                    color: AppColors.black_type,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w400),
                               ),
                               Text(
                                 "End Time",
-                                style: TextStyle(color: AppColors.black_type, fontSize: 11, fontWeight: FontWeight.w400),
+                                style: TextStyle(
+                                    color: AppColors.black_type,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w400),
                               ),
                             ],
                           ),
@@ -351,17 +392,23 @@ class _Booking_boatState extends State<Booking_boat> {
                             children: [
                               Text(
                                 "${retrievedEmployeeList![widget.index].boat_start}:00",
-                                style: TextStyle(color: AppColors.black_type, fontSize: 16, fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                    color: AppColors.black_type,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500),
                               ),
                               Text(
                                 "${retrievedEmployeeList![widget.index].boat_end}:00",
-                                style: TextStyle(color: AppColors.black_type, fontSize: 16, fontWeight: FontWeight.w500),
+                                style: const TextStyle(
+                                    color: AppColors.black_type,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ],
                           ),
                         ),
-                        Divider_con(),
-                        SizedBox(
+                        const Divider_con(),
+                        const SizedBox(
                           height: 14,
                         ),
                         const Padding(
@@ -371,7 +418,7 @@ class _Booking_boatState extends State<Booking_boat> {
                             style: AppTextStyles.kPrimaryS7W5,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 23,
                         ),
                         Padding(
@@ -381,14 +428,14 @@ class _Booking_boatState extends State<Booking_boat> {
                             hours == null ? "12 hours" : "$hours hours",
                           ),
                         ),
-                        Divider_con(),
+                        const Divider_con(),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Boat_Expenses("Amount Paid",
                               "\$${hours == null ? retrievedEmployeeList![widget.index].boatprice : hours *= int.parse(retrievedEmployeeList![widget.index].boatprice.toString())}"),
                         ),
-                        Divider_con(),
-                        SizedBox(
+                        const Divider_con(),
+                        const SizedBox(
                           height: 5,
                         ),
                         const Padding(
@@ -408,15 +455,15 @@ class _Booking_boatState extends State<Booking_boat> {
                             style: AppTextStyles.Klight,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 19,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                          child: Reuseable_button("Send Request", AppColors.Sdark_blue, Appassets.icon_search1, () async {
-
-
-
+                          child: Reuseable_button(
+                              "Send Request",
+                              AppColors.Sdark_blue,
+                              Appassets.icon_search1, () async {
                             if (i == null || i == 0) {
                               Fluttertoast.showToast(
                                   msg: "Please decide hours",
@@ -427,40 +474,67 @@ class _Booking_boatState extends State<Booking_boat> {
                                   textColor: Colors.white,
                                   fontSize: 16.0);
                             } else {
-
-                              var g = i *= int.parse(retrievedEmployeeList![widget.index].boatprice.toString());
+                              var g = i *= int.parse(
+                                  retrievedEmployeeList![widget.index]
+                                      .boatprice
+                                      .toString());
                               Get.to(Home());
                               var dh = end!.toInt() - start!.toInt();
                               log('$dh');
                               log('$g');
-                              booking_con.send_request(
-                                documnet_idforeview: widget.document_id,
-                                sender_token: sender_token,
-                                token: retrievedEmployeeList![widget.index].token,
-                                sender_uid: _auth.currentUser!.uid,
-                                uid: widget.uid,
-                                boatname: widget.bname,
-                                boatimage: widget.bimg,
-                                hoursperday: dh,
-                                uuid: uuid.v4(),
-                                total_amount: g,
-                                start_time: retrievedEmployeeList![widget.index].boat_start,
-                                end_time: retrievedEmployeeList![widget.index].boat_end,
-                                overview: retrievedEmployeeList![widget.index].overview,
-                              );
+                              FirebaseFirestore.instance
+                                  .collection("pending_bookings")
+                                  .doc(widget.uid)
+                                  .collection("allpendingboats")
+                                  .doc()
+                                  .set({
+                                'pending_bname': widget.bname,
+                                'pending_bname': widget.bname,
+                                'function_uid': uuid.v4(),
+                                'token':
+                                    retrievedEmployeeList![widget.index].token,
+                                'pending_bimage': widget.bimg,
+                                'hours_perday': hours,
+                                'sender_uid': _auth.currentUser!.uid,
+                                'id': widget.uid,
+                                'start_time':
+                                    retrievedEmployeeList![widget.index]
+                                        .boat_start,
+                                'end_time': end,
+                                'total_amount': g,
+                                //'overview': overview,
+                                'sender_token': sender_token,
+                                'documnet_idforeview': widget.document_id,
+                                'request': "pending"
+                              });
+                              // booking_con.send_request(
+                              //   documnet_idforeview: widget.document_id,
+                              //   sender_token: sender_token,
+                              //   token: retrievedEmployeeList![widget.index].token,
+                              //   sender_uid: _auth.currentUser!.uid,
+                              //   uid: widget.uid,
+                              //   boatname: widget.bname,
+                              //   boatimage: widget.bimg,
+                              //   hoursperday: dh,
+                              //   uuid: uuid.v4(),
+                              //   total_amount: g,
+                              //   start_time: retrievedEmployeeList![widget.index].boat_start,
+                              //   end_time: retrievedEmployeeList![widget.index].boat_end,
+                              //   overview: retrievedEmployeeList![widget.index].overview,
+                              // );
 
-                             Fluttertoast.showToast(
-                                 msg: "Request sent",
-                                 toastLength: Toast.LENGTH_SHORT,
-                                 gravity: ToastGravity.BOTTOM_LEFT,
-                                 timeInSecForIosWeb: 1,
-                                 backgroundColor: Colors.black,
-                                 textColor: Colors.white,
-                                 fontSize: 16.0);
+                              Fluttertoast.showToast(
+                                  msg: "Request sent",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM_LEFT,
+                                  timeInSecForIosWeb: 1,
+                                  backgroundColor: Colors.black,
+                                  textColor: Colors.white,
+                                  fontSize: 16.0);
                             }
                           }),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8,
                         ),
                       ],
@@ -468,7 +542,7 @@ class _Booking_boatState extends State<Booking_boat> {
                   ],
                 );
               })
-          : Center(child: CircularProgressIndicator()),
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }

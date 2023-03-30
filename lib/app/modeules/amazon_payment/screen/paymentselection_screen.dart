@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,8 +15,9 @@ import 'cash_thankyou_screen.dart';
 import 'home_screen.dart';
 
 class PaymentSelectionScreen extends StatefulWidget {
-  PaymentSelectionScreen({Key? key, this.amount}) : super(key: key);
+  PaymentSelectionScreen({Key? key, this.amount, this.id}) : super(key: key);
   int? amount = 0;
+  String? id;
 
   @override
   State<PaymentSelectionScreen> createState() => _PaymentSelectionScreenState();
@@ -23,6 +25,8 @@ class PaymentSelectionScreen extends StatefulWidget {
 
 class _PaymentSelectionScreenState extends State<PaymentSelectionScreen> {
   // AmazonPayFlutter amazonPay = AmazonPayFlutter(sellerId: 'YOUR_SELLER_ID');
+  final firestore = FirebaseFirestore.instance.collection("bookingRequestSend");
+  String? id = "";
   String? matchCode = '';
   int? totalbill;
   var extracted = '';
@@ -84,7 +88,7 @@ class _PaymentSelectionScreenState extends State<PaymentSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("amount ----${widget.amount}");
+    print("  cid ${widget.id} amount ----${widget.amount}");
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -509,9 +513,17 @@ class _PaymentSelectionScreenState extends State<PaymentSelectionScreen> {
                     child: BlueBtn(
                   title: selected == 0 ? payAmounString : " Will Pay Cash",
                   onPressed: () {
+                    print("collecion id ");
+
+                    firestore.doc(widget.id).update({'paymethod': "cash"});
+
                     selected == 0
                         ? _showMyDialog()
-                        : Get.offAll(const CashThankYouScreen());
+                        : Get.offAll(CashThankYouScreen(
+                            cid: widget.id,
+                          ));
+
+                    //  setState(() {});
                   },
                 )),
                 SizedBox(

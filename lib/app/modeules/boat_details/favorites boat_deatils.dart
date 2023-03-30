@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../services/uid.dart';
+import '../../../singaltonClass.dart';
 import '../../bottomapp.dart';
 import '../../global_widgets/back_arrow.dart';
 import '../../global_widgets/reuseable_button.dart';
@@ -45,6 +46,7 @@ class _Favorites_Boat_detailsState extends State<Favorites_Boat_details> {
   var old_value;
   var number;
   var data;
+  var owneruid;
   Future<void> getdata() async {
     await FirebaseFirestore.instance
         .collection('boats')
@@ -55,7 +57,7 @@ class _Favorites_Boat_detailsState extends State<Favorites_Boat_details> {
               debugPrint("Error on get data from User"),
               print(error.toString())
             });
-
+    SessionControllerOwner().owneruid = data["owneruid"];
     rating = data["total_rating"];
     old_value = data["rating"];
     number = data["numbers"];
