@@ -85,6 +85,8 @@ class _Favorites_viewallState extends State<Favorites_viewall> {
                                   height: 15,
                                 ),
                             itemBuilder: (context, index) {
+                              print(
+                                  "owner ${retrievedfavList![index].owneruid}");
                               return Card(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)),

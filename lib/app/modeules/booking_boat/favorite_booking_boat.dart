@@ -4,12 +4,14 @@ import 'package:boat/app/modeules/booking_boat/booking/controller.dart';
 import 'package:boat/app/modeules/booking_boat/widget/boat_expenses.dart';
 import 'package:boat/app/themes/AppColors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../singaltonClass.dart';
 import '../../global_widgets/back_arrow.dart';
 import '../../global_widgets/divider.dart';
 import '../../global_widgets/reuseable_button.dart';
@@ -78,6 +80,7 @@ class _Favorite_Booking_BoatState extends State<Favorite_Booking_Boat> {
     super.initState();
   }
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   var i;
   var startTime;
   var endTime;
@@ -106,9 +109,9 @@ class _Favorite_Booking_BoatState extends State<Favorite_Booking_Boat> {
                                     Get.back();
                                   },
                                   child: Back_arrow(Colors.grey)),
-                              const Text(
-                                "Cancel",
-                                style: TextStyle(
+                              Text(
+                                "Cancel ${retrievedfavList![widget.index].owneruid}",
+                                style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                     color: AppColors.black_type),
@@ -471,12 +474,14 @@ class _Favorite_Booking_BoatState extends State<Favorite_Booking_Boat> {
                                 'request': "pending",
                                 'boatname':
                                     retrievedfavList![widget.index].fboatname,
-                                'uid': widget.uid,
+                                'senderuid': SessionController().userId,
                                 'imgurl':
                                     retrievedfavList![widget.index].fimage,
                                 'starttime': startTime!,
                                 'endtime': endTime!,
-                                'date': date
+                                'date': date,
+                                'owneruid': SessionControllerOwner().owneruid,
+                                'paymethod': ""
                               }).then((value) {
                                 //  ReUse().loginErrorToast("Data Added Succfully");
                                 Get.to(Booking_page(id));

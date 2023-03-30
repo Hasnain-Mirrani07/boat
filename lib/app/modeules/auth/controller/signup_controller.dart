@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../global_widgets/mysnackbars.dart';
 import '../../../models/myappuser.dart';
 import '../profile_selection.dart';
 import 'auth_controller.dart';
@@ -20,7 +19,7 @@ class SignUpController extends GetxController {
   bool _isObsecure = true;
 
   validate() async {
-    Focus.of(Get.context!).unfocus();
+    //  Focus.of(Get.context!).unfocus();
     if (formKey.currentState?.validate() ?? false) {
       final myAppUser = MyAppUser();
       myAppUser.name = usernameC.text.trim();
