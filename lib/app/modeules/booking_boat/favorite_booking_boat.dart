@@ -481,7 +481,8 @@ class _Favorite_Booking_BoatState extends State<Favorite_Booking_Boat> {
                                 'endtime': endTime!,
                                 'date': date,
                                 'owneruid': SessionControllerOwner().owneruid,
-                                'paymethod': ""
+                                'paymethod': "",
+                                'paymentverify': ''
                               }).then((value) {
                                 //  ReUse().loginErrorToast("Data Added Succfully");
                                 Get.to(Booking_page(id));

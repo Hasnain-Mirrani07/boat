@@ -33,6 +33,8 @@ class _Booking_pageState extends State<Booking_page> {
     retrievedboatsList = await service.retrievebookingBoatdata();
   }
 
+  final firestore = FirebaseFirestore.instance.collection("bookingRequestSend");
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final con = Get.put(Booking_request_controller());
   var load = true;
@@ -121,6 +123,9 @@ class _Booking_pageState extends State<Booking_page> {
                             "".toString();
                         var paymentmethod = snapshot.data!.docs[index]
                                 ['paymethod'] ??
+                            "".toString();
+                        var paymentverify = snapshot.data!.docs[index]
+                                ['paymentverify'] ??
                             "".toString();
                         return request == "accept"
                             ? GestureDetector(
@@ -306,21 +311,66 @@ class _Booking_pageState extends State<Booking_page> {
                                                   ),
                                                 ),
                                                 const SizedBox(height: 5),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                    left: 50,
-                                                  ),
-                                                  child: Text(
-                                                      paymentmethod == "cash"
-                                                          ? "Cash Payment \$$price"
-                                                          : "Unpaid \$$price",
-                                                      style: const TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Colors.blue)),
-                                                ),
+                                                paymentmethod == "cash"
+                                                    ? Row(
+                                                        children: [
+                                                          paymentverify ==
+                                                                  "verify"
+                                                              ? Row(
+                                                                  children: [
+                                                                    const Text(
+                                                                        "Verified",
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                16,
+                                                                            fontWeight:
+                                                                                FontWeight.w500,
+                                                                            color: Colors.green)),
+                                                                    SizedBox(
+                                                                      width:
+                                                                          2.w,
+                                                                    ),
+                                                                    Icon(
+                                                                      Icons
+                                                                          .check,
+                                                                      color: Colors
+                                                                          .green,
+                                                                      size:
+                                                                          18.h,
+                                                                    )
+                                                                  ],
+                                                                )
+                                                              : const Text(
+                                                                  "UnVerified",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500,
+                                                                      color: Colors
+                                                                          .red)),
+                                                          SizedBox(
+                                                            width: 10.w,
+                                                          ),
+                                                          Text(
+                                                              "Cash Payment \$$price",
+                                                              style: const TextStyle(
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  color: Colors
+                                                                      .blue)),
+                                                        ],
+                                                      )
+                                                    : Text("UnPaid \$$price",
+                                                        style: const TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color:
+                                                                Colors.blue)),
                                               ],
                                             ),
                                           ],
