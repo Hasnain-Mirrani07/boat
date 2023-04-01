@@ -21,13 +21,13 @@ class SessionControllerOwner {
   SessionControllerOwner._internal();
 }
 
-class SessionControllerCID {
-  static final SessionControllerCID _session = SessionControllerCID._internal();
+class SessionControllerToken {
+  static final SessionControllerToken _session = SessionControllerToken._internal();
 
-  String? cid;
+  String? dtoken;
 
-  factory SessionControllerCID() {
+  factory SessionControllerToken() {
     return _session;
   }
-  SessionControllerCID._internal();
+  SessionControllerToken._internal();
 }

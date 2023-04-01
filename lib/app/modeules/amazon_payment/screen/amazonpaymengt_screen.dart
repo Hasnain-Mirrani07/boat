@@ -1,4 +1,3 @@
-import 'package:boat/app/modeules/amazon_payment/screen/cash_thankyou_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,6 +21,59 @@ class _AmazonPaymentScreenState extends State<AmazonPaymentScreen> {
   get editingController => null;
 
   bool isChecked = false;
+
+  var result;
+
+  // void amazonpayment() async {
+  //   var requestParam = {
+  //     "amount": 100,
+  //     "command": "AUTHORIZATION",
+  //     "currency": "USD",
+  //     "customer_email": "test@gmail.com",
+  //     "language": "en",
+  //     "merchant_reference": "https://checkout.payfort.com/FortAPI/paymentPage",
+  //     "sdk_token": SessionControllerToken().dtoken
+  //   };
+
+  //   try {
+  //     var sandbox;
+  //     result = await FlutterAmazonpaymentservices.normalPay(
+  //         requestParam, EnvironmentType.production,
+  //         isShowResponsePage: true);
+  //   } on PlatformException catch (e) {
+  //     print("Error ${e.message} details:${e.details}");
+  //     return;
+  //   }
+
+  //   print("Success $result");
+  // }
+
+  // Future<void> validateApi() async {
+  //   var requestParam = {
+  //     "amount": 100,
+  //     "command": "AUTHORIZATION",
+  //     "currency": "USD",
+  //     "customer_email": "test@gmail.com",
+  //     "language": "en",
+  //     "merchant_reference": "your merchant reference",
+  //     "sdk_token": "sdk token generated per transaction"
+  //   };
+  //   try {
+  //     var sandbox;
+  //     result =
+  //         await FlutterAmazonpaymentservices.validateApi(requestParam, sandbox);
+  //   } on PlatformException catch (e) {
+  //     print("Error ${e.message} details:${e.details}");
+  //     return;
+  //   }
+  //   print("Success $result");
+  // }
+
+  @override
+  void initState() {
+    // validateApi();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -417,9 +469,13 @@ class _AmazonPaymentScreenState extends State<AmazonPaymentScreen> {
                 ),
                 Center(
                   child: BlueBtn(
-                    title: "Pay (${widget.amount}\$)",
-                    onPressed: () => Get.to(const ThankYouScreen()),
-                  ),
+                      title: "Pay (${widget.amount}\$)",
+                      onPressed: () {
+                        setState(() {
+                          //  amazonpayment();
+                        });
+                        Get.to(const ThankYouScreen());
+                      }),
                 ),
                 SizedBox(
                   height: 26.36.h,
