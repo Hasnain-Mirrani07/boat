@@ -3,16 +3,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../app/bottomapp.dart';
 import '../app/modeules/auth/profile_selection.dart';
+import '../singaltonClass.dart';
 
 class FirebaseMethods {
   static Future<void> generateTokenAndSaveToDb() async {
     debugPrint("***generating toke***");
     FirebaseMessaging.instance.getToken().then((value) => {
+          SessionControllerToken().dtoken = value,
           FirebaseFirestore.instance
               .collection('Users')
               .doc(FirebaseAuth.instance.currentUser?.uid ?? "")
@@ -35,7 +36,7 @@ class FirebaseMethods {
       Get.snackbar(
         "Error",
         e.message.toString(),
-        icon: Icon(Icons.person, color: Colors.red),
+        icon: const Icon(Icons.person, color: Colors.red),
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -58,7 +59,7 @@ class FirebaseMethods {
       Get.snackbar(
         "Error",
         e.message.toString(),
-        icon: Icon(Icons.person, color: Colors.red),
+        icon: const Icon(Icons.person, color: Colors.red),
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -87,16 +88,14 @@ class FirebaseMethods {
           'name': user.displayName,
           'bookings': 0.toString(),
         });
-        if (user != null) {
-          Get.to(Home());
-        }
+        Get.to(Home());
         // for go to the HomePage screen
       }
     } on FirebaseAuthException catch (e) {
       Get.snackbar(
         "Error",
         e.message.toString(),
-        icon: Icon(Icons.person, color: Colors.red),
+        icon: const Icon(Icons.person, color: Colors.red),
         snackPosition: SnackPosition.BOTTOM,
       );
     }

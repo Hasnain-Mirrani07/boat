@@ -526,7 +526,7 @@ class _Booking_pageState extends State<Booking_page> {
                                                         )
                                                       ],
                                                     ),
-                                                    request == "pendding"
+                                                    request == "pending"
                                                         ? Listener(
                                                             onPointerDown:
                                                                 (event) => Get.to(
